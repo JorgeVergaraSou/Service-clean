@@ -1,44 +1,60 @@
-[
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "services": [
     {
       "id": 1,
       "service": "Lavado de ventanas",
       "price": 2350,
-	  "surface": 1,
+      "surface": 1,
       "img": "img.jpg"
     },
     {
       "id": 2,
       "service": "Lavado de alfombras",
       "price": 1350,
-	  "surface": 1,
+      "surface": 1,
       "img": ""
     },
     {
       "id": 3,
       "service": "Lavado de pisos",
       "price": 3350,
-	  "surface": 1,
+      "surface": 1,
       "img": ""
     },
     {
       "id": 4,
       "service": "Lavado de acolchados",
       "price": 1350,
-	  "surface": 1,
+      "surface": 1,
       "img": ""
     },
     {
       "id": 5,
       "service": "Lavado de canaletas",
       "price": 2350,
-	  "surface": 1,
+      "surface": 1,
       "img": ""
     },
     {
       "id": 6,
       "service": "Lavado de piletas",
       "price": 5350,
-	  "surface": 1,
+      "surface": 1,
       "img": ""
+    },
+    {
+      "service": "Lavado de piletas",
+      "price": 350,
+      "surface": 1,
+      "img": "foto",
+      "id": 7
     }
   ]
+}
