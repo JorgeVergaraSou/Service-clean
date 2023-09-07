@@ -29,4 +29,10 @@ export class CleanServController {
         return this.cleanServService.deleteServiceById(id);
     }
 
+    @Put(':id')
+    @HttpCode(204)
+    updateServiceById(@Param('id') id: number, @Body() body): Promise<void> {
+        return this.cleanServService.updateServiceById(id, body);
+    }
+
 }

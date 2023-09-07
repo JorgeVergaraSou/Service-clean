@@ -1,9 +1,8 @@
 import { HttpCode, HttpStatus, Injectable, NotFoundException, BadRequestException, } from '@nestjs/common';
-import { join } from 'path';
-import * as fs from 'fs'
-
+//import { join } from 'path';
+//import * as fs from 'fs'
+//import { application } from 'express';
 import { Clean } from './cleanServ.interface';
-import { application } from 'express';
 
 const BASE_URL = 'http://localhost:3030/services/';
 
@@ -13,7 +12,7 @@ export class CleanServService {
     //ESTO TRAE TODOS LOS SERVICIOS DISPONIBLES
     async getAll(): Promise<Clean[]> {
         const res = await fetch(BASE_URL);
-        
+
         const parsed = await res.json();
         console.log(parsed);
         return parsed;
@@ -52,6 +51,19 @@ export class CleanServService {
     }
 
     //FIN DELETE BY ID
+
+    async updateServiceById(id: number, body: Clean): Promise<void> {
+        const isService = await this.getServiceById(id);
+        if (!Object.keys(isService).length) return; 
+        const updatedService = { ...body, id };
+        await fetch(BASE_URL + id, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedService),
+        });
+    }
 
     //CREA UN NUEVO ID
     private async newId(): Promise<number> {

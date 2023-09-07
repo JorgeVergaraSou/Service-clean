@@ -55,6 +55,13 @@
       "surface": 1,
       "img": "foto",
       "id": 7
+    },
+    {
+      "service": "Lavado de cocinas",
+      "price": 350,
+      "surface": 12,
+      "img": "foto12",
+      "id": 8
     }
   ]
 }
