@@ -1,18 +1,18 @@
-import { HttpCode, HttpStatus, Injectable, NotFoundException, BadRequestException, } from '@nestjs/common';
-//import { join } from 'path';
-//import * as fs from 'fs'
-//import { application } from 'express';
-import { Clean } from './cleanServ.interface';
+import { Injectable } from '@nestjs/common';
+import { UpdateCleanDto } from './Update-clean.dto';
 
 const BASE_URL = 'http://localhost:3030/services/';
 
 @Injectable()
 export class CleanServService {
 
-    //ESTO TRAE TODOS LOS SERVICIOS DISPONIBLES
-    async getAll(): Promise<Clean[]> {
-        const res = await fetch(BASE_URL);
+    createCleanService(body: any): any {
+        throw new Error('Method not implemented.');
+    }
 
+    //ESTO TRAE TODOS LOS SERVICIOS DISPONIBLES
+    async getAll(): Promise<any> {
+        const res = await fetch(BASE_URL);
         const parsed = await res.json();
         console.log(parsed);
         return parsed;
@@ -20,30 +20,31 @@ export class CleanServService {
     // FIN
 
     // esto regresa al controlador lo solicitado por id
-    async getServiceById(id: number): Promise<any> {
-        const res = await fetch(BASE_URL + id);
+    async getServiceById(id: number): Promise<UpdateCleanDto> {
+        const res = await fetch(`BASE_URL ${id}`);
         const parsed = await res.json();
-        if (Object.keys(parsed).length) return parsed;
-        throw new NotFoundException(`Servicio con el id: ${id} no existe`);
-
+        return parsed;
     }
     // POST
-    async createnNewService(clean: Clean) {
+    async createNewService(clean: UpdateCleanDto): Promise<UpdateCleanDto> {
         const id = await this.newId();
         const newService = { ...clean, id };
-        await fetch(BASE_URL, {
+
+        const res = await fetch(BASE_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(newService),
         });
+        const parsed = await res.json();
+        return parsed;
     }
     // FIN POST
 
     //INICIO DELETE BY ID
-    async deleteServiceById(id: number): Promise<any> {
-        const res = await fetch(BASE_URL + id, {
+    async deleteServiceById(id: number): Promise<UpdateCleanDto> {
+        const res = await fetch(`BASE_URL  ${id}`, {
             method: 'DELETE',
         });
         const parsed = await res.json();
@@ -52,11 +53,11 @@ export class CleanServService {
 
     //FIN DELETE BY ID
 
-    async updateServiceById(id: number, body: Clean): Promise<void> {
+    async updateServiceById(id: number, Clean: UpdateCleanDto): Promise<UpdateCleanDto> {
         const isService = await this.getServiceById(id);
-        if (!Object.keys(isService).length) return; 
-        const updatedService = { ...body, id };
-        await fetch(BASE_URL + id, {
+        if (!Object.keys(isService).length) return;
+        const updatedService = { ...Clean, id };
+        await fetch(`BASE_URL  ${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -66,9 +67,10 @@ export class CleanServService {
     }
 
     //CREA UN NUEVO ID
-    private async newId(): Promise<number> {
+    async newId(): Promise<number> {
         const cleanId = await this.getAll();
-        const id = cleanId.pop().id + 1;
+        const lastId = cleanId [cleanId.length - 1];
+        const id = lastId.id +1;
         return id;
     }
     //FIN CREA UN NUEVO ID

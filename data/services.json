@@ -29,11 +29,11 @@
       "img": ""
     },
     {
-      "id": 4,
-      "service": "Lavado de acolchados",
-      "price": 1350,
-      "surface": 1,
-      "img": ""
+      "service": "aspirado",
+      "price": 5000,
+      "surface": 102,
+      "img": "foto12345",
+      "id": 4
     },
     {
       "id": 5,
@@ -57,10 +57,10 @@
       "id": 7
     },
     {
-      "service": "Lavado de cocinas",
-      "price": 350,
-      "surface": 12,
-      "img": "foto12",
+      "service": "Lavado",
+      "price": 5000,
+      "surface": 102,
+      "img": "foto12345",
       "id": 8
     }
   ]
